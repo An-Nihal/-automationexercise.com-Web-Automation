@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-# -automationexercise.com-Web-Automation
-=======
 # automationexercise.com Web Automation
 
 This repository contains an automated web testing project for automationexercise.com, utilizing Selenium, Java, TestNG, and the Page Object Model (POM) framework. The project is structured based on Maven architecture.
@@ -52,4 +49,3 @@ This project is licensed under the [MIT License](LICENSE).
 If you would like to contribute to this project, you're welcome.
 
 For any questions or issues, please [open an issue](https://github.com/An-Nihal/automationexercise-web-automation/issues).
->>>>>>> test
