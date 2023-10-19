@@ -1,11 +1,8 @@
 package Pages;
 
 import Configs.BaseDriver;
-import com.cemiltokatli.passwordgenerate.Password;
-import com.cemiltokatli.passwordgenerate.PasswordType;
-import com.github.javafaker.Faker;
+import Utilities.Utilities;
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -14,14 +11,6 @@ import org.testng.Assert;
 
 public class SignUpPage extends BaseDriver {
 
-    public SignUpPage(WebDriver driver) {
-
-        PageFactory.initElements(driver, this);
-    }
-
-    //WebElements
-    @FindBy(xpath = "//a[normalize-space()='Signup / Login']")
-    WebElement logSignbutton;
     @FindBy(xpath = "//body/section[@id='form']/div[1]/div[1]/div[3]/div[1]/form[1]/input[2]")
     public WebElement name;
     @FindBy(xpath = "//body/section[@id='form']/div[1]/div[1]/div[3]/div[1]/form[1]/input[3]")
@@ -36,8 +25,6 @@ public class SignUpPage extends BaseDriver {
     public WebElement genderFemale;
     @FindBy(xpath = "//input[@id='name']")
     public WebElement nameField;
-    @FindBy(xpath = "//input[@id='email']")
-    WebElement emailField;
     @FindBy(xpath = "//input[@id='password']")
     public WebElement passwordField;
     @FindBy(xpath = "//select[@id='days']")
@@ -48,10 +35,6 @@ public class SignUpPage extends BaseDriver {
     public WebElement yearDropdown;
     @FindBy(xpath = "//input[@id='newsletter']")
     public WebElement newsLetterCheckBox;
-    @FindBy(xpath = "//input[@id='optin']")
-    WebElement offerCheckBox;
-    @FindBy(xpath = "//input[@id='first_name']")
-    WebElement firstNameField;
     @FindBy(xpath = "//input[@id='last_name']")
     public WebElement lastnameField;
     @FindBy(xpath = "//input[@id='company']")
@@ -66,28 +49,31 @@ public class SignUpPage extends BaseDriver {
     public WebElement cityField;
     @FindBy(xpath = "//input[@id='zipcode']")
     public WebElement zipField;
+    Utilities utilities = new Utilities();
+    //WebElements
+    @FindBy(xpath = "//a[normalize-space()='Signup / Login']")
+    WebElement logSignbutton;
+    @FindBy(xpath = "//input[@id='email']")
+    WebElement emailField;
+    @FindBy(xpath = "//input[@id='optin']")
+    WebElement offerCheckBox;
+    @FindBy(xpath = "//input[@id='first_name']")
+    WebElement firstNameField;
     @FindBy(xpath = "//input[@id='mobile_number']")
     WebElement mobileField;
     @FindBy(xpath = "//button[normalize-space()='Create Account']")
     WebElement createAccountButton;
+    @FindBy(xpath = "//a[contains(text(),'Continue')]")
+    WebElement continueButton;
+    @FindBy(xpath = "//header/div[1]/div[1]/div[1]/div[2]/div[1]/ul[1]/li[4]/a[1]")
+    WebElement logOutButton;
+    public SignUpPage() {
+
+        PageFactory.initElements(driver, this);
+    }
 
 
-    //Random variables generating with Faker API
-    Faker faker = new Faker();
-    String FirstName = faker.name().firstName();
-    String LastName = faker.name().lastName();
-    //String randomEmail = RandomStringUtils.randomAlphabetic(8);
-    String EMAIL = LastName + "@test.com";
-    String CompanyName = faker.company().name();
-    String Address = faker.address().fullAddress();
-    String State = faker.address().stateAbbr();
-    String City = faker.address().cityName();
-    String Zip = faker.address().zipCodeByState(State);
-    Password pass = Password.createPassword(PasswordType.ALL);
-    String PASSWORD = pass.generate();
-    String MobileNumber = faker.phoneNumber().cellPhone();
-
-
+    //Test Methods//
 
     //Verify that home page is visible successfully
     public void homePageVisibility() {
@@ -109,9 +95,9 @@ public class SignUpPage extends BaseDriver {
         name.clear();
         email.clear();
 
-        name.sendKeys(LastName);
+        name.sendKeys(utilities.LastName);
         Thread.sleep(1000);
-        email.sendKeys(EMAIL);
+        email.sendKeys(utilities.EMAIL);
         Thread.sleep(1000);
     }
 
@@ -123,7 +109,7 @@ public class SignUpPage extends BaseDriver {
     }
 
     //Verify that 'ENTER ACCOUNT INFORMATION' is visible
-    public void verifyEnterAccInfo(){
+    public void verifyEnterAccInfo() {
 
         Assert.assertTrue(EnterAccountInfoForm.isDisplayed(), "ENTER ACCOUNT INFORMATION is not visible");
 
@@ -136,13 +122,13 @@ public class SignUpPage extends BaseDriver {
         genderMale.click();
 
         if (nameField.getAttribute("value").isEmpty()) {
-            nameField.sendKeys(LastName);
+            nameField.sendKeys(utilities.LastName);
         }
         if (emailField.getAttribute("value").isEmpty()) {
-            emailField.sendKeys(EMAIL);
+            emailField.sendKeys(utilities.EMAIL);
         }
 
-        passwordField.sendKeys(PASSWORD);
+        passwordField.sendKeys(utilities.PASSWORD);
 
         dayDropdown.click();
         for (int i = 0; i < 7; i++) {
@@ -174,16 +160,16 @@ public class SignUpPage extends BaseDriver {
     public void fillAddressInfoDetails() throws InterruptedException {
 
 
-        firstNameField.sendKeys(FirstName);
+        firstNameField.sendKeys(utilities.FirstName);
         Thread.sleep(500);
 
-        lastnameField.sendKeys(LastName);
+        lastnameField.sendKeys(utilities.LastName);
         Thread.sleep(500);
 
-        companyField.sendKeys(CompanyName);
+        companyField.sendKeys(utilities.CompanyName);
         Thread.sleep(500);
 
-        AddressField.sendKeys(Address);
+        AddressField.sendKeys(utilities.Address);
         Thread.sleep(500);
 
         countryDropDown.click();
@@ -191,17 +177,18 @@ public class SignUpPage extends BaseDriver {
         select.selectByValue("United States");
         Thread.sleep(500);
 
-        stateField.sendKeys(State);
+        stateField.sendKeys(utilities.State);
         Thread.sleep(500);
-        cityField.sendKeys(City);
+        cityField.sendKeys(utilities.City);
         Thread.sleep(500);
-        zipField.sendKeys(Zip);
+        zipField.sendKeys(utilities.Zip);
         Thread.sleep(500);
-        mobileField.sendKeys(MobileNumber);
+        mobileField.sendKeys(utilities.MobileNumber);
         Thread.sleep(500);
     }
+
     //Click 'Create Account button'
-    public void clickCreateAccountButton()  {
+    public void clickCreateAccountButton() {
         createAccountButton.click();
     }
     //Verify that 'ACCOUNT CREATED!' is visible
@@ -211,6 +198,12 @@ public class SignUpPage extends BaseDriver {
         String expectedTitle = "Automation Exercise - Account Created";
         String actualTitle = driver.getTitle();
         Assert.assertEquals(actualTitle, expectedTitle);
+    }
+
+    //Click on 'continue' and then Logout
+    public void continueAndLogout() {
+        continueButton.click();
+        logOutButton.click();
     }
 
 }

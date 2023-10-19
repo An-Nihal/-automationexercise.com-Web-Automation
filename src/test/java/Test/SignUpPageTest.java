@@ -10,7 +10,7 @@ public class SignUpPageTest extends BaseDriver {
     @Test(priority = 1, description = "Verify that home page is visible successfully")
     public void homeVisibilityVerify() throws InterruptedException {
 
-        signUpPage = new SignUpPage(driver);
+        signUpPage = new SignUpPage();
 
         signUpPage.homePageVisibility();
 
@@ -24,6 +24,7 @@ public class SignUpPageTest extends BaseDriver {
 
     @Test(priority = 3, description = "Enter name and email address and click on Signup")
     public void signUpPerform() throws InterruptedException {
+
         signUpPage.enterNamePass();
         signUpPage.clickSignup();
         Thread.sleep(2000);
@@ -47,16 +48,23 @@ public class SignUpPageTest extends BaseDriver {
         signUpPage.fillAddressInfoDetails();
     }
 
-    @Test (priority =7, description = "Click 'Create Account button'")
+    @Test(priority = 7, description = "Click 'Create Account button'")
     public void createAccountClick() throws InterruptedException {
         signUpPage.clickCreateAccountButton();
         Thread.sleep(2000);
     }
 
-    @Test(priority = 8,description = "Verify that 'ACCOUNT CREATED!' is visible")
-    public void verifyAccountCreate(){
+    @Test(priority = 8, description = "Verify that 'ACCOUNT CREATED!' is visible")
+    public void verifyAccountCreate() throws InterruptedException {
 
         signUpPage.accountCreationVerification();
+        Thread.sleep(300);
+    }
+
+    @Test(priority = 9, description = "Click 'Continue' and then 'Logout'")
+    public void continueAndLogout() throws InterruptedException {
+        signUpPage.continueAndLogout();
+        Thread.sleep(500);
     }
 
 
