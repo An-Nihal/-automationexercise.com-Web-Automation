@@ -36,7 +36,9 @@ The `Utilities` package contains various utility classes for the project, includ
 1. Ensure you have the necessary tools and dependencies installed.
 2. Clone the repository: `git clone https://github.com/your-username/automationexercise-web-automation.git`
 3. Navigate to the project directory: `cd automationexercise-web-automation`
-4. Run the tests using Maven: `mvn clean test`
+4. Open the project in an IDE (Intellij, Eclipse etc.)
+5. Add dependency if needed.
+6. Run the tests
 
 Feel free to customize and extend this automation framework according to your specific requirements.
 
