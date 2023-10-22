@@ -40,12 +40,8 @@ The `Utilities` package contains various utility classes for the project, includ
 
 Feel free to customize and extend this automation framework according to your specific requirements.
 
-## License
-
-This project is licensed under the [MIT License](LICENSE).
-
 ## Contribution
 
 If you would like to contribute to this project, you're welcome.
 
-For any questions or issues, please [open an issue](https://github.com/An-Nihal/automationexercise-web-automation/issues).
+For any questions or issues, please [open an issue](https://github.com/An-Nihal/-automationexercise.com-Web-Automation/issues).
